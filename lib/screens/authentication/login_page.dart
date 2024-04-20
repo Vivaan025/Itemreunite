@@ -3,6 +3,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lost_and_found/screens/authentication/forgot_password.dart';
 import 'package:lost_and_found/screens/homepage/home_page.dart';
 import 'package:lost_and_found/screens/authentication/signup_page.dart';
+import 'package:lost_and_found/services/auth_services.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -10,7 +11,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  // AuthServices _authServices = AuthServices();
+  AuthServices _authServices = AuthServices();
   GlobalKey<FormState> _loginKey = GlobalKey();
 
   var _emailController = TextEditingController();
@@ -44,30 +45,30 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-  // Future<void> logIn() async {
-  //   if (_loginKey.currentState!.validate()) {
-  //     setState(() {
-  //       isLoading = true;
-  //     });
-  //     await _authServices
-  //         .signInUserWithEmailAndPassword(
-  //             _emailController.text, _passwordController.text)
-  //         .then((result) async {
-  //       if (result != null) {
-  //         Navigator.pushAndRemoveUntil(
-  //             context,
-  //             MaterialPageRoute(builder: (context) => HomePage()),
-  //             (route) => false);
-  //         Fluttertoast.showToast(msg: "Login Success");
-  //       } else {
-  //         setState(() {
-  //           isLoading = false;
-  //         });
-  //         Fluttertoast.showToast(msg: "Email/Password is incorrect");
-  //       }
-  //     });
-  //   }
-  // }
+  Future<void> logIn() async {
+    if (_loginKey.currentState!.validate()) {
+      setState(() {
+        isLoading = true;
+      });
+      await _authServices
+          .signInUserWithEmailAndPassword(
+              _emailController.text, _passwordController.text)
+          .then((result) async {
+        if (result != null) {
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => HomePage()),
+              (route) => false);
+          Fluttertoast.showToast(msg: "Login Success");
+        } else {
+          setState(() {
+            isLoading = false;
+          });
+          Fluttertoast.showToast(msg: "Email/Password is incorrect");
+        }
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -246,7 +247,7 @@ class _LoginPageState extends State<LoginPage> {
                             width: double.infinity,
                             child: InkWell(
                               onTap: () {
-                                // _authServices.signInUserWithGoogle(context);
+                                _authServices.signInUserWithGoogle(context);
                               },
                               // color: Colors.indigo.shade50,
                               // shape: RoundedRectangleBorder(

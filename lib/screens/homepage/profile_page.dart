@@ -9,6 +9,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lost_and_found/screens/authentication/login_page.dart';
 import 'package:lost_and_found/screens/homepage/account.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:lost_and_found/screens/homepage/my_claims.dart';
 import 'package:lost_and_found/screens/homepage/my_found.dart';
 import 'package:lost_and_found/screens/homepage/rewards_page.dart';
 // import 'package:lost_and_found/screens/homepage/rewards_page.dart';
@@ -156,8 +157,8 @@ class _ProfilePageState extends State<ProfilePage> {
           margin: EdgeInsets.only(left: 20, right: 20),
           child: ListTile(
             onTap: () {
-              // Navigator.push(
-              //     context, MaterialPageRoute(builder: (context) => MyClaims()));
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => MyClaims()));
             },
             leading: Icon(
               Icons.plagiarism_outlined,
@@ -219,8 +220,8 @@ class _ProfilePageState extends State<ProfilePage> {
           margin: EdgeInsets.only(left: 20, right: 20),
           child: ListTile(
             onTap: () {
-              // Navigator.push(
-              //     context, MaterialPageRoute(builder: (context) => Account()));
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => Account()));
             },
             leading: Icon(
               Icons.account_circle_outlined,

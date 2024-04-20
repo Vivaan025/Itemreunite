@@ -10,6 +10,8 @@ import 'package:lost_and_found/screens/authentication/login_page.dart';
 // import 'package:lost_and_found/screens/homepage/report_found_page.dart';
 // import 'package:lost_and_found/screens/homepage/report_lost_page.dart';
 import 'package:lost_and_found/screens/homepage/profile_page.dart';
+import 'package:lost_and_found/screens/homepage/report_found_page.dart';
+import 'package:lost_and_found/screens/homepage/report_lost_page.dart';
 
 import 'home.dart';
 
@@ -105,8 +107,8 @@ class _HomePageState extends State<HomePage> {
       TextStyle(fontSize: 30, fontWeight: FontWeight.w600);
   List<Widget> _widgetOptions = <Widget>[
     Home(),
-    // ReportLostPage(),
-    // ReportFoundPage(),
+    ReportLostPage(),
+    ReportFoundPage(),
     ProfilePage()
   ];
   @override

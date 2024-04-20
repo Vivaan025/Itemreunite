@@ -38,6 +38,20 @@ dependencies:
   # firebase_auth: ^4.17.6
   google_nav_bar: ^5.0.6
   cached_network_image: ^3.3.1
+  permission_handler:
+  location: 
+  image_picker: 
+  random_string: ^2.3.1
+  firebase_auth:
+  cloud_firestore:
+  google_sign_in: 
+  google_sign_in_platform_interface:
+  google_sign_in_web:
+  # Add platform-specific implementations for Android and iOS
+  google_sign_in_ios:
+  google_sign_in_android:
+  onboarding: ^4.0.2
+  floating_bottom_navigation_bar: ^1.5.2
 
 dev_dependencies:
   flutter_test:

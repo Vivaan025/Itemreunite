@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "126438785534",
+    "project_id": "itemreunite-de3e2",
+    "storage_bucket": "itemreunite-de3e2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:126438785534:android:086279e6569b64929e80af",
+        "android_client_info": {
+          "package_name": "com.example.lost_and_found"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBmwpm5AP8mIc8K1XaXnbp6j7d9m_aeSIE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
