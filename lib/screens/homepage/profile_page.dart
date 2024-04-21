@@ -1,18 +1,18 @@
-// import 'package:cached_network_image/cached_network_image.dart';
-// import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:lost_and_found/screens/homepage/my_claims.dart';
-// import 'my_found.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:lost_and_found/screens/homepage/my_claims.dart';
+import 'my_found.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-// import 'package:lost_and_found/Services/auth_services.dart';
+import 'package:lost_and_found/Services/auth_services.dart';
 import 'package:lost_and_found/screens/authentication/login_page.dart';
 import 'package:lost_and_found/screens/homepage/account.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:lost_and_found/screens/homepage/my_claims.dart';
 import 'package:lost_and_found/screens/homepage/my_found.dart';
 import 'package:lost_and_found/screens/homepage/rewards_page.dart';
-// import 'package:lost_and_found/screens/homepage/rewards_page.dart';
+import 'package:lost_and_found/screens/homepage/rewards_page.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -20,25 +20,25 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  // FirebaseAuth _auth = FirebaseAuth.instance;
+  FirebaseAuth _auth = FirebaseAuth.instance;
   String userName = '';
   String photoUrl = '';
 
-  // AuthServices _authServices = AuthServices();
+  AuthServices _authServices = AuthServices();
 
-  // getUserName() {
-  //   FirebaseFirestore.instance
-  //       .collection("users")
-  //       .doc(FirebaseAuth.instance.currentUser?.uid)
-  //       .get()
-  //       .then((snapshot) {
-  //     setState(() {
-  //       userName = snapshot.data()?['fullName'];
-  //       photoUrl = snapshot.data()?['profilePhoto'];
-  //     });
-  //     print(photoUrl);
-  //   });
-  // }
+  getUserName() {
+    FirebaseFirestore.instance
+        .collection("users")
+        .doc(FirebaseAuth.instance.currentUser?.uid)
+        .get()
+        .then((snapshot) {
+      setState(() {
+        userName = snapshot.data()?['fullName'];
+        photoUrl = snapshot.data()?['profilePhoto'];
+      });
+      print(photoUrl);
+    });
+  }
 
   Future<void> _showMyDialog() async {
     return showDialog<void>(
@@ -70,7 +70,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 'Yes',
               ),
               onPressed: () async {
-                // await _authServices.signOut();
+                await _authServices.signOut();
                 Fluttertoast.showToast(msg: "Sign out Successful");
                 Navigator.pushAndRemoveUntil(
                     context,
@@ -95,7 +95,7 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   void initState() {
     super.initState();
-    // getUserName();
+    getUserName();
   }
 
   TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.w600);

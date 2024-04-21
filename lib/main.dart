@@ -28,7 +28,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:lost_and_found/model/page_model.dart';
 import 'package:onboarding/onboarding.dart';
-import 'package:floating_bottom_navigation_bar/floating_bottom_navigation_bar.dart';
+// import 'package:floating_bottom_navigation_bar/floating_bottom_navigation_bar.dart';
 //import 'package:lost_and_found/screens/homepage/founder_get_started.dart';
 //import 'package:lost_and_found/screens/getstarted/founder_get_started.dart';
 import 'package:lost_and_found/screens/homepage/home_page.dart';
@@ -52,7 +52,7 @@ class _LostAndFoundState extends State<LostAndFound> {
   FirebaseAuth _auth = FirebaseAuth.instance;
 
   getCurrentUser() {
-    user = _auth.currentUser!;
+    user = _auth?.currentUser;
     print('user id : $user');
   }
 
@@ -90,8 +90,7 @@ class _LostAndFoundState extends State<LostAndFound> {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         fontFamily: 'ProductSans',
-        primaryColor: Color(0xff1e1e1e),
-        accentColor: Color(0xffff5f6d),
+        primaryColor: Color(0xff1e1e1e), colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Color(0xffff5f6d)),
       ),
       //  home: ReportLostPage(),
       // home: user != null

@@ -26,11 +26,11 @@ class _LoginPageState extends State<LoginPage> {
     });
   }
 
-  String? emailValidator(String value) {
+  String? emailValidator(String? value) {
     Pattern pattern =
         r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
     RegExp regex = new RegExp("");
-    if (!regex.hasMatch(value)) {
+    if (!regex.hasMatch(value ?? "")) {
       return 'Email format is invalid';
     } else {
       return null;
@@ -108,7 +108,7 @@ class _LoginPageState extends State<LoginPage> {
                       child: Column(
                         children: <Widget>[
                           TextFormField(
-                            // validator: emailValidator,
+                            validator: emailValidator,
                             controller: _emailController,
                             keyboardType: TextInputType.emailAddress,
                             cursorColor: Theme.of(context).colorScheme.secondary,
@@ -174,11 +174,11 @@ class _LoginPageState extends State<LoginPage> {
                             alignment: Alignment.topRight,
                             child: InkWell(
                               // onPressed: () {
-                                // Navigator.push(
-                                //     context,
-                                //     MaterialPageRoute(
-                                //         builder: (context) =>
-                                //             ForgotPassword()));
+                              //   Navigator.push(
+                              //       context,
+                              //       MaterialPageRoute(
+                              //           builder: (context) =>
+                              //               ForgotPassword()));
                               // },
                               onTap: (){
                                   Navigator.push(
@@ -202,10 +202,10 @@ class _LoginPageState extends State<LoginPage> {
                             width: double.infinity,
                             child: InkWell(
                               onTap: () async {
-                                // logIn();
-                                 Navigator.of(context).push(
-                                    MaterialPageRoute(builder: (context) => HomePage(), fullscreenDialog: false),
-                                  );
+                                logIn();
+                                //  Navigator.of(context).push(
+                                //     MaterialPageRoute(builder: (context) => HomePage(), fullscreenDialog: false),
+                                //   );
                               },
                               // padding: EdgeInsets.all(0),
                               child: Ink(

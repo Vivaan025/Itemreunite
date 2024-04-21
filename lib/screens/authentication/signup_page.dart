@@ -2,7 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-// import 'package:lost_and_found/Services/auth_services.dart';
+import 'package:lost_and_found/Services/auth_services.dart';
 import 'package:lost_and_found/screens/homepage/home_page.dart';
 
 class SignupPage extends StatefulWidget {
@@ -20,7 +20,7 @@ class _SignupPageState extends State<SignupPage> {
 
   bool _hidePassword = true;
 
-  // AuthServices _authServices = AuthServices();
+  AuthServices _authServices = AuthServices();
 
   String? emailValidator(String value) {
     Pattern pattern =
@@ -41,18 +41,18 @@ class _SignupPageState extends State<SignupPage> {
     }
   }
 
-  // Future<void> signUnWithEmailAndPassword() async {
-  //   if (_signUpForm.currentState!.validate()) {
-  //     _authServices.createUserWithEmailAndPassword(
-  //         _emailController.text,
-  //         _passwordController.text,
-  //         _fullNameController.text,
-  //         _phoneNoController.text);
-  //     Fluttertoast.showToast(msg: "User created successfully");
-  //     Navigator.push(
-  //         context, MaterialPageRoute(builder: (context) => HomePage()));
-  //   }
-  // }
+  Future<void> signUnWithEmailAndPassword() async {
+    if (_signUpForm.currentState!.validate()) {
+      _authServices.createUserWithEmailAndPassword(
+          _emailController.text,
+          _passwordController.text,
+          _fullNameController.text,
+          _phoneNoController.text);
+      Fluttertoast.showToast(msg: "User created successfully");
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => HomePage()));
+    }
+  }
 
   peekPassword() {
     setState(() {
@@ -223,7 +223,7 @@ class _SignupPageState extends State<SignupPage> {
                       height: 50,
                       child: InkWell(
                         onTap: () {
-                          // signUnWithEmailAndPassword();
+                          signUnWithEmailAndPassword();
                         },
                         // padding: EdgeInsets.all(0),
                         // shape: RoundedRectangleBorder(
@@ -265,9 +265,9 @@ class _SignupPageState extends State<SignupPage> {
                       width: double.infinity,
                       child: InkWell(
                         onTap: () {
-                          // _authServices.signInUserWithGoogle(
-                          //   context,
-                          // );
+                          _authServices.signInUserWithGoogle(
+                            context,
+                          );
                         },
                         // color: Colors.indigo.shade50,
                         // shape: RoundedRectangleBorder(

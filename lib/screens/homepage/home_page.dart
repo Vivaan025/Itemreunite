@@ -1,14 +1,11 @@
-// import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-// import 'package:lost_and_found/Services/auth_services.dart';
+import 'package:lost_and_found/Services/auth_services.dart';
 import 'package:lost_and_found/screens/authentication/login_page.dart';
 //import 'package:lost_and_found/screens/homepage/founder_get_started.dart';
-// import 'package:lost_and_found/screens/homepage/profile_page.dart';
-// import 'package:lost_and_found/screens/homepage/report_found_page.dart';
-// import 'package:lost_and_found/screens/homepage/report_lost_page.dart';
 import 'package:lost_and_found/screens/homepage/profile_page.dart';
 import 'package:lost_and_found/screens/homepage/report_found_page.dart';
 import 'package:lost_and_found/screens/homepage/report_lost_page.dart';
@@ -21,23 +18,23 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // User? user;
+  User? user;
 
-  // FirebaseAuth _auth = FirebaseAuth.instance;
+  FirebaseAuth _auth = FirebaseAuth.instance;
 
-  // AuthServices _authServices = AuthServices();
+  AuthServices _authServices = AuthServices();
 
   bool isLoading = false;
 
-  // getCurrentUser() {
-  //   user = _auth.currentUser;
-  //   print('user id : $user');
-  // }
+  getCurrentUser() {
+    user = _auth.currentUser;
+    print('user id : $user');
+  }
 
   @override
   void initState() {
     super.initState();
-    // getCurrentUser();
+    getCurrentUser();
   }
 
   int _botNavIndex = 1;
@@ -81,7 +78,7 @@ class _HomePageState extends State<HomePage> {
                 'Yes',
               ),
               onPressed: () async {
-                // await _authServices.signOut();
+                await _authServices.signOut();
                 Fluttertoast.showToast(msg: "Sign In Successful");
                 Navigator.pushAndRemoveUntil(
                     context,
@@ -109,7 +106,7 @@ class _HomePageState extends State<HomePage> {
     Home(),
     ReportLostPage(),
     ReportFoundPage(),
-    ProfilePage()
+    ProfilePage(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -146,7 +143,7 @@ class _HomePageState extends State<HomePage> {
                   iconSize: 24,
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                   duration: Duration(milliseconds: 400),
-                  tabBackgroundColor: Color(0xffff5f6d),
+                  tabBackgroundColor: Theme.of(context).colorScheme.secondary,
                   tabs: [
                     GButton(
                       icon: Icons.home_outlined,

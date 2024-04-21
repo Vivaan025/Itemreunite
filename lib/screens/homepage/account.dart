@@ -96,9 +96,11 @@
 import 'dart:io';
 import 'dart:math';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 // import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:firebase_storage/firebase_storage.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
@@ -122,66 +124,66 @@ class _AccountState extends State<Account> {
   @override
   void initState() {
     super.initState();
-    // FirebaseFirestore.instance
-    //     .collection("users")
-    //     .doc(FirebaseAuth.instance.currentUser?.uid)
-    //     .get()
-    //     .then((snapshot) {
-    //   setState(() {
-    //     photoUrl = snapshot.data()?['profilePhoto'];
-    //     _fullName.text = snapshot.data()?['fullName'];
-    //     _phoneNumber.text = snapshot.data()?['phoneNo'];
-    //     emailAddress = snapshot.data()?['emailAddress'];
-    //   });
-    // });
+    FirebaseFirestore.instance
+        .collection("users")
+        .doc(FirebaseAuth.instance.currentUser?.uid)
+        .get()
+        .then((snapshot) {
+      setState(() {
+        photoUrl = snapshot.data()?['profilePhoto'];
+        _fullName.text = snapshot.data()?['fullName'];
+        _phoneNumber.text = snapshot.data()?['phoneNo'];
+        emailAddress = snapshot.data()?['emailAddress'];
+      });
+    });
   }
 
-  // Future<void> addProfilePhoto() async {
-  //   final _firebaseStorage = FirebaseStorage.instance;
-  //   final _imagePicker = ImagePicker();
+  Future<void> addProfilePhoto() async {
+    final _firebaseStorage = FirebaseStorage.instance;
+    final _imagePicker = ImagePicker();
 
-  //   var randomInt = Random.secure().nextInt(10000);
+    var randomInt = Random.secure().nextInt(10000);
 
-  //   PickedFile image;
-  //   //Check Permissions
-  //   await Permission.photos.request();
+    PickedFile image;
+    //Check Permissions
+    await Permission.photos.request();
 
-  //   var permissionStatus = await Permission.photos.status;
+    var permissionStatus = await Permission.photos.status;
 
-  //   if (permissionStatus.isGranted) {
-  //     //Select Image
-  //     image = (await _imagePicker.getImage(source: ImageSource.gallery))!;
-  //     var file = File(image.path);
+    if (permissionStatus.isGranted) {
+      //Select Image
+      image = (await _imagePicker.pickImage(source: ImageSource.gallery))! as PickedFile;
+      var file = File(image.path);
 
-  //     if (image != null) {
-  //       //Upload to Firebase
-  //       var snapshot = await _firebaseStorage
-  //           .ref()
-  //           .child('profilePhoto')
-  //           .child("$randomInt")
-  //           .putFile(file);
-  //       var downloadUrl = await snapshot.ref.getDownloadURL();
-  //       setState(() {
-  //         photoUrl = downloadUrl;
-  //       });
-  //     } else {
-  //       print('No Image Path Received');
-  //     }
-  //   } else {
-  //     print('Permission not granted. Try Again with permission access');
-  //   }
-  // }
+      if (image != null) {
+        //Upload to Firebase
+        var snapshot = await _firebaseStorage
+            .ref()
+            .child('profilePhoto')
+            .child("$randomInt")
+            .putFile(file);
+        var downloadUrl = await snapshot.ref.getDownloadURL();
+        setState(() {
+          photoUrl = downloadUrl;
+        });
+      } else {
+        print('No Image Path Received');
+      }
+    } else {
+      print('Permission not granted. Try Again with permission access');
+    }
+  }
 
-  // Future<void> saveChanges() async {
-  //   await FirebaseFirestore.instance
-  //       .collection("users")
-  //       .doc(FirebaseAuth.instance.currentUser?.uid)
-  //       .update({
-  //     "fullName": _fullName.text,
-  //     "profilePhoto": photoUrl,
-  //     "phoneNumber": _phoneNumber.text
-  //   });
-  // }
+  Future<void> saveChanges() async {
+    await FirebaseFirestore.instance
+        .collection("users")
+        .doc(FirebaseAuth.instance.currentUser?.uid)
+        .update({
+      "fullName": _fullName.text,
+      "profilePhoto": photoUrl,
+      "phoneNumber": _phoneNumber.text
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

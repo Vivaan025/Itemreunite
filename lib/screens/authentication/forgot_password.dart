@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 // import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:lost_and_found/services/auth_services.dart';
 // import 'package:lost_and_found/Services/auth_services.dart';
 
 
@@ -13,7 +14,7 @@ class ForgotPassword extends StatefulWidget {
 class _ForgotPasswordState extends State<ForgotPassword> {
   var _emailController = TextEditingController();
 
-  // AuthServices _authServices = AuthServices();
+  AuthServices _authServices = AuthServices();
 
   @override
   Widget build(BuildContext context) {
@@ -94,8 +95,8 @@ class _ForgotPasswordState extends State<ForgotPassword> {
               width: double.infinity,
               child: TextButton(
                 onPressed: () {
-                  // _authServices.forgotPassword(_emailController.text);
-                  // Fluttertoast.showToast(msg: "Email has been sent");
+                  _authServices.forgotPassword(_emailController.text);
+                  Fluttertoast.showToast(msg: "Email has been sent");
                 },
                 // padding: EdgeInsets.all(0),
                 child: Ink(
